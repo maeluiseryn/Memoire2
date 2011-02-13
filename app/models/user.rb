@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
                        :length => { :within => 8..40 }
   #validates :salt, :presence=> true
 
-  before_save :encrypt_password
+  before_save :encrypt_password if new_record?
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

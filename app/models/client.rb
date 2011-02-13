@@ -2,7 +2,7 @@ class Client < ActiveRecord::Base
 
   has_many :projects
 
-  attr_accessible :name , :first_name ,:ref_client
+  attr_accessible :name , :first_name 
 
   validates :name ,       :presence => true ,
                           :length     => { :maximum => 50 }
@@ -14,6 +14,7 @@ class Client < ActiveRecord::Base
   private
 
   def generate_ref
-    self.ref_client=Client.maximum("ref_client")+1
+
+    self.ref_client=Client.maximum("ref_client")+1 if new_record?
   end
 end
