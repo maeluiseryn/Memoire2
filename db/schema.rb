@@ -10,20 +10,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110213134051) do
+ActiveRecord::Schema.define(:version => 20110213160445) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
     t.string   "first_name"
-    t.string   "ref_client"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ref_client"
   end
 
+  add_index "clients", ["ref_client"], :name => "index_clients_on_ref_client", :unique => true
+
   create_table "projects", :force => true do |t|
-    t.string   "ref_project"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "client_id"
+    t.integer  "ref_project"
   end
 
   create_table "users", :force => true do |t|
